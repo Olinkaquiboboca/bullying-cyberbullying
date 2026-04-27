@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- descrição do site pra aparecer bonito no Google e na professora não falar nada -->
+<meta content="Site educacional sobre bullying e cyberbullying — o que é, como identificar, e como agir." name="description"/>
+<title>Bullying &amp; Cyberbullying — Entenda, Identifique, Aja</title>
+<!--
+    REFERRER POLICY
+    ───────────────────────────────────────────
+    isso aqui eu coloquei porque o youtube tava dando um erro esquisito
+    pesquisei bastante e parece que o youtube precisa saber de onde tá
+    vindo a requisição senão ele não deixa carregar o vídeo
+    coloquei aqui e no iframe também só pra ter certeza
+    funcionou (depois de muita coisa que eu vou comentar lá embaixo)
+  -->
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<!-- preconnect: começa a conectar com o youtube antes do usuário clicar
+       aprendi isso num artigo de performance, parece que ajuda a carregar mais rápido
+       usei youtube-nocookie porque aparentemente é mais tranquilo com cookies -->
+<link href="https://www.youtube-nocookie.com" rel="preconnect"/>
+<link href="https://i.ytimg.com" rel="preconnect"/>
+<!-- fontes bonitas pra impressionar a professora
+       Lora pro título, Source Sans pro texto normal
+       display=swap pra não travar a página enquanto carrega a fonte -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+
+<link href="style.css" rel="stylesheet"/></head>
+<body>
+<!-- ============================================================
+       NAVBAR
+       menu fixo no topo com os links de navegação
+       no mobile aparece só o hambúrguer que abre o drawer lateral
+  ============================================================ -->
+<nav aria-label="Navegação principal" id="navbar">
+<div class="navbar-inner">
+<a class="navbar-brand" href="#hero">Bullying &amp; Cyberbullying</a>
+<ul class="navbar-links" role="list">
+<li><a href="#introducao">Introdução</a></li>
+<li><a href="#o-que-e">O Que É</a></li>
+<li><a href="#cyberbullying">Cyberbullying</a></li>
+<li><a href="#impactos">Impactos</a></li>
+<li><a href="#como-identificar">Identificar</a></li>
+<li><a href="#o-que-fazer">Agir</a></li>
+</ul>
+<!-- hambúrguer: só aparece no mobile via css -->
+<button aria-label="Abrir menu de navegação" id="nav-hamburger">
+<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</button>
+</div>
+</nav>
+<!-- botão flutuante no canto — aparece ao scrollar, abre o drawer -->
+<button aria-label="Abrir menu de navegação" id="fab-btn">
+<svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</button>
+<!-- overlay escuro atrás do drawer -->
+<div aria-hidden="true" id="drawer-overlay"></div>
+<!-- drawer lateral com todos os links de navegação -->
+<aside aria-label="Menu lateral" id="drawer">
+<button aria-label="Fechar menu" id="drawer-close">✕</button>
+<ul class="drawer-nav" role="list">
+<li><a href="#introducao">Introdução</a></li>
+<li><a href="#o-que-e">O Que É Bullying</a></li>
+<li><a href="#cyberbullying">Cyberbullying em Profundidade</a></li>
+<li><a href="#impactos">Impactos e Consequências</a></li>
+<li><a href="#como-identificar">Como Identificar</a></li>
+<li><a href="#o-que-fazer">O Que Fazer</a></li>
+<li><a href="#conclusao">Conclusão</a></li>
+<li><a href="#contador">Estatísticas do Site</a></li>
+</ul>
+</aside>
+<!-- espaçador pra o conteúdo não ficar atrás do navbar fixo -->
+<div class="navbar-spacer"></div>
+<!-- ============================================================
+       SEÇÃO 1 — HERO
+       apresentação principal, ocupa a tela toda
+       a imagem vem do undraw.co que tem ilustrações svg gratuitas
+       coloquei onerror="this.style.display='none'" porque às vezes
+       a api do undraw não responde e a imagem quebrada ficava feia
+  ============================================================ -->
+<section aria-label="Apresentação" id="hero">
+<p class="hero-label">Projeto Educacional — Equipe Escolar</p>
+<h1 class="hero-title">Bullying e Cyberbullying: Entenda, Identifique, Aja</h1>
+<p class="hero-subtitle">Um guia educacional sobre uma das formas mais silenciosas e devastadoras de violência entre jovens — e como cada um de nós pode fazer a diferença.</p>
+<img alt="Ilustração de jovens em comunidade" class="hero-illustration" loading="lazy" onerror="this.style.display='none'" src="https://undraw.co/api/illustrations/friendship"/>
+<!-- sumário clicável que leva direto pra cada seção -->
+<nav aria-label="Índice do conteúdo" class="hero-toc">
+<a href="#introducao">Introdução</a>
+<a href="#o-que-e">O Que É</a>
+<a href="#cyberbullying">Cyberbullying</a>
+<a href="#impactos">Impactos</a>
+<a href="#como-identificar">Como Identificar</a>
+<a href="#o-que-fazer">Como Agir</a>
+<a href="#conclusao">Conclusão</a>
+</nav>
+<!-- essa seta animada foi a coisa mais fácil e bonita que fiz aqui -->
+<div aria-hidden="true" class="scroll-indicator">
+<span>Role para ler</span>
+<svg fill="none" height="20" stroke="rgba(255,255,255,0.6)" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 2 — INTRODUÇÃO
+  ============================================================ -->
+<section aria-labelledby="sec2-title" class="section-gap" id="introducao">
+<div class="reading-col">
+<div class="intro-layout">
+<div>
+<p class="section-eyebrow">Por onde começar</p>
+<h2 class="section-title" id="sec2-title">O que o silêncio esconde</h2>
+<div class="prose">
+<p>O bullying é uma realidade presente em escolas de todo o Brasil — e muitas vezes acontece de forma invisível para adultos e educadores. Não se trata de uma briga isolada ou de uma fase passageira: é uma violência sistemática, repetida, que desequilibra intencionalmente o poder entre quem agride e quem é agredido.</p>
+<p>No Brasil, os números são preocupantes. Segundo o relatório PENSE (Pesquisa Nacional de Saúde do Escolar), realizado pelo IBGE, mais de <strong>40% dos estudantes</strong> do ensino fundamental já sofreram alguma forma de bullying. A intimidação pode ser física, verbal, relacional — e cada vez mais, digital.</p>
+<p>Com a expansão das redes sociais e o uso intensivo de smartphones por crianças e adolescentes, o bullying ultrapassou os muros da escola. Hoje, a vítima pode ser perseguida 24 horas por dia, 7 dias por semana, sem encontrar refúgio nem em casa. Esta é a face mais cruel do cyberbullying.</p>
+</div>
+<blockquote class="impact">
+            Segundo o IBGE/PENSE 2019, 7 em cada 10 vítimas de bullying nunca pediram ajuda a um adulto — seja por vergonha, medo de retaliação ou por não acreditar que seriam levadas a sério.
+            <cite>— IBGE, Pesquisa Nacional de Saúde do Escolar (PENSE), 2019</cite>
+</blockquote>
+<div class="prose">
+<p>Entender o bullying — seus mecanismos, suas causas e seus impactos — é o primeiro passo para combatê-lo. Este site foi produzido por uma equipe de estudantes com o objetivo de trazer informação clara, acessível e honesta sobre um tema que afeta diretamente nossa geração.</p>
+</div>
+</div>
+<img alt="Ilustração de estudante em ambiente escolar" loading="lazy" onerror="this.style.display='none'" src="https://undraw.co/api/illustrations/back_to_school" style="border-radius: 12px; max-width: 340px; width: 100%;"/>
+</div>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 3 — O QUE É BULLYING
+  ============================================================ -->
+<section aria-labelledby="sec3-title" class="section-gap" id="o-que-e">
+<div class="reading-col">
+<p class="section-eyebrow">Conceitos fundamentais</p>
+<h2 class="section-title" id="sec3-title">O Que É Bullying</h2>
+<!-- card com a definição legal, art 1o da lei 13.185/2015 -->
+<div aria-label="Definição formal de bullying" class="definition-card" role="note">
+<strong>Definição formal (Lei nº 13.185/2015 — Programa de Combate ao Bullying):</strong>
+<p style="margin-top: 0.75rem; font-size: 0.95rem;">Bullying é todo ato de violência física ou psicológica, intencional e repetitivo, que ocorre sem motivação evidente, praticado por indivíduo ou grupo contra uma ou mais pessoas, com o objetivo de intimidá-la ou agredi-la, causando dor e angústia às vítimas, em uma relação de desequilíbrio de poder.</p>
+</div>
+<div class="prose">
+<p>Três elementos definem o bullying e o distinguem de conflitos comuns: a <strong>intencionalidade</strong> (quem agride quer causar dano), a <strong>repetição</strong> (não é um episódio único) e o <strong>desequilíbrio de poder</strong> (a vítima tem dificuldade de se defender). A ausência de qualquer um desses elementos pode indicar um conflito, mas não necessariamente bullying.</p>
+</div>
+<div class="types-grid">
+<!-- tipo 1: físico — o mais visível e fácil de identificar -->
+<article class="type-card">
+<div aria-hidden="true" class="type-icon">
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"></path>
+</svg>
+</div>
+<h3>Bullying Físico</h3>
+<p>Empurrões, socos, chutes, beliscões, roubos ou destruição de pertences. É o tipo mais visível e, muitas vezes, o mais fácil de identificar por pais e professores.</p>
+</article>
+<!-- tipo 2: verbal — xingamentos e apelidos que ficam pra sempre -->
+<article class="type-card">
+<div aria-hidden="true" class="type-icon">
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</div>
+<h3>Bullying Verbal</h3>
+<p>Apelidos ofensivos, xingamentos, humilhações, ameaças e comentários depreciativos sobre aparência, capacidade intelectual, família ou origem. Deixa marcas profundas apesar de ser invisível a olho nu.</p>
+</article>
+<!-- tipo 3: relacional — o mais cruel porque ataca a necessidade de pertencer -->
+<article class="type-card">
+<div aria-hidden="true" class="type-icon">
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="9" cy="7" r="4"></circle><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
+<line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line>
+</svg>
+</div>
+<h3>Bullying Relacional</h3>
+<p>Exclusão social deliberada, espalhamento de boatos, manipulação de amizades e isolamento. É especialmente cruel por atacar a necessidade fundamental de pertencimento do adolescente.</p>
+</article>
+<!-- tipo 4: cyberbullying — tema do site, então aparece aqui também -->
+<article class="type-card">
+<div aria-hidden="true" class="type-icon">
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<rect height="14" rx="2" width="20" x="2" y="3"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line>
+</svg>
+</div>
+<h3>Cyberbullying</h3>
+<p>Agressões praticadas por meio de dispositivos digitais — redes sociais, aplicativos de mensagens, jogos online e plataformas de vídeo. Não tem hora ou lugar para parar.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 4 — CYBERBULLYING EM PROFUNDIDADE
+  ============================================================ -->
+<section aria-labelledby="sec4-title" class="section-gap" id="cyberbullying">
+<div class="reading-col">
+<p class="section-eyebrow">A dimensão digital</p>
+<h2 class="section-title" id="sec4-title">Cyberbullying em Profundidade</h2>
+<div class="prose">
+<p>O cyberbullying compartilha os elementos essenciais do bullying tradicional — intencionalidade, repetição e desequilíbrio de poder —, mas ganha características novas e devastadoras no ambiente digital. Entender essas diferenças é crucial para combatê-lo com eficácia.</p>
+</div>
+<!-- os três diferenciais que fazem o cyber ser pior -->
+<div class="diff-cards">
+<div class="diff-card">
+<div aria-hidden="true" class="diff-icon">🌐</div>
+<h4>Alcance Ilimitado</h4>
+<p>Uma mensagem humilhante pode ser vista por centenas ou milhares de pessoas em minutos, multiplicando o dano de forma exponencial.</p>
+</div>
+<div class="diff-card">
+<div aria-hidden="true" class="diff-icon">🕐</div>
+<h4>Permanência 24/7</h4>
+<p>Diferente do bullying escolar, o digital não para na saída da aula. A vítima não encontra refúgio — nem em casa, nem na madrugada.</p>
+</div>
+<div class="diff-card">
+<div aria-hidden="true" class="diff-icon">🎭</div>
+<h4>Anonimato</h4>
+<p>Perfis falsos e a distância da tela reduzem a empatia de quem agride e tornam mais difícil identificar os responsáveis.</p>
+</div>
+</div>
+<!--
+        VÍDEO 1 — thumbnail clicável que abre o player em lightbox
+        
+        o data-video-id é o ID do youtube (a parte depois do ?v= na url)
+        por exemplo: youtube.com/watch?v=OBe1-nenr64 → id é OBe1-nenr64
+        
+        a thumbnail vem da api de thumbnails do youtube:
+        https://img.youtube.com/vi/[ID]/maxresdefault.jpg
+        
+        o onerror troca pra hqdefault.jpg caso o maxresdefault não exista
+        (alguns vídeos mais antigos não têm a versão em alta resolução)
+        
+      -->
+<div aria-label="Assistir vídeo: O que é Cyberbullying" class="video-thumb-wrap" data-video-id="OBe1-nenr64" data-video-title="O que é Cyberbullying — Vídeo Educativo" role="button" tabindex="0">
+<img alt="Miniatura do vídeo: O que é Cyberbullying" onerror="this.src='https://img.youtube.com/vi/OBe1-nenr64/hqdefault.jpg'" src="https://img.youtube.com/vi/OBe1-nenr64/maxresdefault.jpg"/>
+<div aria-hidden="true" class="video-play-btn">
+<svg viewbox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="40" fill="rgba(0,0,0,0.55)" r="38"></circle>
+<polygon fill="white" points="32,26 32,54 58,40"></polygon>
+</svg>
+</div>
+</div>
+<p class="video-caption">Clique para assistir: O que é Cyberbullying — Vídeo Educativo</p>
+<!-- linha do tempo do cyberbullying no brasil
+           pesquisei os anos, achei os dados certos, demorou -->
+<h3 style="font-family: var(--font-serif); font-size: 1.1rem; margin-top: 2.5rem; margin-bottom: 0.5rem;">Evolução do Cyberbullying no Brasil</h3>
+<div class="timeline">
+<div class="timeline-track">
+<div class="timeline-item">
+<div class="timeline-year">2004</div>
+<div class="timeline-desc">Orkut é lançado. Primeiros casos de humilhações online em comunidades e depoimentos.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2009</div>
+<div class="timeline-desc">WhatsApp e smartphones popularizam o acesso. Grupos de mensagens tornam-se novos espaços de agressão.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2012</div>
+<div class="timeline-desc">Instagram cresce entre adolescentes. Comentários ofensivos em fotos se tornam forma comum de cyberbullying.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2016</div>
+<div class="timeline-desc">Casos de transmissões ao vivo utilizadas para humilhar vítimas em tempo real emergem nas redes sociais.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2018</div>
+<div class="timeline-desc">Lei nº 13.663 obriga escolas a promoverem ações de combate ao bullying e cyberbullying.</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2020+</div>
+<div class="timeline-desc">Pandemia e aulas remotas ampliam o tempo online. TikTok e Discord tornam-se novos territórios de risco.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 5 — IMPACTOS E CONSEQUÊNCIAS
+  ============================================================ -->
+<section aria-labelledby="sec5-title" class="section-gap" id="impactos">
+<div class="reading-col">
+<p class="section-eyebrow">As marcas invisíveis</p>
+<h2 class="section-title" id="sec5-title">Impactos e Consequências</h2>
+<div class="prose">
+<p>O bullying não é apenas uma fase — deixa marcas que podem durar décadas. Os impactos afetam o desenvolvimento emocional, o desempenho escolar e a saúde física dos jovens, e em situações extremas podem ter consequências irreversíveis.</p>
+</div>
+<!-- os números mais impactantes em cards grandes -->
+<div class="impact-grid">
+<div class="impact-card">
+<div class="impact-number">57%</div>
+<h4>Queda no desempenho escolar</h4>
+<p>Mais da metade das vítimas relatam piora nas notas e dificuldade de concentração em sala.</p>
+</div>
+<div class="impact-card">
+<div class="impact-number">3×</div>
+<h4>Maior risco de ansiedade</h4>
+<p>Vítimas de bullying têm três vezes mais chances de desenvolver transtornos de ansiedade, segundo estudos da Fiocruz.</p>
+</div>
+<div class="impact-card">
+<div class="impact-number">1 em 5</div>
+<h4>Pensamentos autolesivos</h4>
+<p>Pesquisas indicam que um em cada cinco adolescentes vítimas relata pensamentos de autolesão em algum momento.</p>
+</div>
+</div>
+<blockquote class="impact">
+        O UNICEF Brasil aponta que estudantes vítimas de bullying têm duas vezes mais probabilidade de faltar à escola, criando um ciclo de evasão e exclusão social que compromete o futuro educacional dessas crianças.
+        <cite>— UNICEF Brasil, Relatório sobre Violência Escolar, 2021</cite>
+</blockquote>
+<div class="prose">
+<p>Os impactos psicológicos mais frequentes incluem depressão, isolamento social, baixa autoestima, fobia escolar e, nos casos mais graves, ideação suicida. É importante compreender que as consequências do bullying não desaparecem automaticamente com o fim das agressões — muitas vítimas carregam o peso psicológico na vida adulta.</p>
+<p>Para quem pratica o bullying, também há consequências: maior probabilidade de envolvimento em atos violentos na adolescência e na vida adulta, dificuldades em relacionamentos interpessoais e tendência ao comportamento antissocial.</p>
+</div>
+<blockquote class="impact">
+        Segundo dados do IBGE coletados em 2019, o Brasil ocupa posição preocupante no ranking mundial de bullying escolar, com prevalência significativamente acima da média de países de renda similar.
+        <cite>— IBGE, Pesquisa Nacional de Saúde do Escolar (PENSE), 2019</cite>
+</blockquote>
+<img alt="Ilustração sobre saúde emocional e bem-estar de adolescentes" loading="lazy" onerror="this.style.display='none'" src="https://undraw.co/api/illustrations/feeling_blue" style="max-width: 300px; margin: 2rem auto; border-radius: 12px;"/>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 6 — COMO IDENTIFICAR
+  ============================================================ -->
+<section aria-labelledby="sec6-title" class="section-gap" id="como-identificar">
+<div class="reading-col">
+<p class="section-eyebrow">Sinais de alerta</p>
+<h2 class="section-title" id="sec6-title">Como Identificar</h2>
+<div class="prose">
+<p>Identificar o bullying é fundamental para interromper o ciclo. Como os agressores geralmente operam em segredo e as vítimas frequentemente se calam por vergonha ou medo, é essencial que pais, professores e colegas estejam atentos aos sinais — mesmo os mais sutis.</p>
+</div>
+<div class="checklist-grid">
+<!-- coluna da esquerda: quem sofre — cor vermelha/accent -->
+<div class="checklist-col victims">
+<h3>Sinais de Quem Sofre</h3>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Mudança repentina de comportamento ou humor sem motivo aparente</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Relutância em ir à escola — reclamações frequentes de dor de cabeça ou barriga</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Queda brusca no desempenho escolar</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Isolamento social, perda de amigos e recusa a atividades que antes gostava</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Pertences danificados ou desaparecidos sem explicação</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Distúrbios de sono — pesadelos, insônia ou dormir demais</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Comportamento ansioso ao usar o celular — ou, ao contrário, abandono repentino das redes sociais</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Sinais de autolesão ou fala sobre não querer mais existir</span>
+</div>
+</div>
+<!-- coluna da direita: quem pratica — cor azul/primary -->
+<div class="checklist-col perpetrators">
+<h3>Sinais de Quem Pratica</h3>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Comportamento dominador com colegas — precisa sentir-se superior</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Dificuldade em aceitar regras e frustração — reage de forma agressiva a limites</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Pouca empatia — acha engraçadas as situações em que outros são humilhados</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Histórico de agressividade em casa ou em outros contextos</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Compartilha conteúdo humilhante sobre colegas nas redes sociais</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Nega comportamentos agressivos quando confrontado — culpa a vítima</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Mantém grupo de "aliados" que reforçam ou assistem às agressões</span>
+</div>
+<div class="check-item">
+<div aria-hidden="true" class="check-box"></div>
+<span>Valoriza muito o status social e a popularidade a qualquer custo</span>
+</div>
+</div>
+</div>
+<!--
+        VÍDEO 2 — segundo vídeo do site
+        mesmo sistema do vídeo 1 mas com id diferente
+        a thumbnail e o lightbox funcionam igual
+      -->
+<div aria-label="Assistir vídeo: Como identificar e reagir ao bullying" class="video-thumb-wrap" data-video-id="Gv5g4GkX9EQ" data-video-title="Como identificar e reagir ao bullying — Vídeo Educativo" role="button" style="margin-top: 2.5rem;" tabindex="0">
+<img alt="Miniatura do vídeo: Como identificar e reagir ao bullying" onerror="this.src='https://img.youtube.com/vi/Gv5g4GkX9EQ/hqdefault.jpg'" src="https://img.youtube.com/vi/Gv5g4GkX9EQ/maxresdefault.jpg"/>
+<div aria-hidden="true" class="video-play-btn">
+<svg viewbox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="40" fill="rgba(0,0,0,0.55)" r="38"></circle>
+<polygon fill="white" points="32,26 32,54 58,40"></polygon>
+</svg>
+</div>
+</div>
+<p class="video-caption">Clique para assistir: Como identificar e reagir ao bullying — Vídeo Educativo</p>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 7 — O QUE FAZER
+  ============================================================ -->
+<section aria-labelledby="sec7-title" class="section-gap" id="o-que-fazer">
+<div class="reading-col">
+<p class="section-eyebrow" style="color: var(--color-success);">Prevenção e ação</p>
+<h2 class="section-title" id="sec7-title">O Que Fazer: Prevenção e Ação</h2>
+<div class="prose">
+<p>Saber identificar o bullying é apenas o primeiro passo. O mais importante é agir — de forma adequada ao papel de cada um. Vítimas, testemunhas e responsáveis têm caminhos diferentes, mas todos podem fazer a diferença.</p>
+</div>
+<!-- 3 cards de ação: vítima / testemunha / responsável -->
+<div class="action-cards">
+<article class="action-card">
+<h4>Se você é vítima</h4>
+<ul>
+<li>Conte para um adulto de confiança — familiar, professor ou orientador escolar</li>
+<li>Documente as agressões: salve prints, anote datas e testemunhas</li>
+<li>Não responda às provocações online — isso alimenta o agressor</li>
+<li>Bloqueie e denuncie perfis agressores nas plataformas</li>
+<li>Busque apoio profissional: psicólogo ou serviços de saúde mental</li>
+<li>Lembre-se: você não tem culpa. Pedir ajuda é coragem.</li>
+</ul>
+</article>
+<article class="action-card">
+<h4>Se você testemunhou</h4>
+<ul>
+<li>Não ignore e não compartilhe conteúdo humilhante — mesmo que seus amigos façam isso</li>
+<li>Posicione-se ao lado da vítima — a presença de um aliado já reduz o dano</li>
+<li>Reporte o que viu a um adulto ou à escola, mesmo que anonimamente</li>
+<li>Não ria nem "curta" postagens que humilham colegas</li>
+<li>Convide a vítima a participar de atividades — o isolamento é parte do dano</li>
+</ul>
+</article>
+<article class="action-card">
+<h4>Se você é pai, mãe ou educador</h4>
+<ul>
+<li>Crie um ambiente seguro para que crianças e adolescentes falem sobre o que vivem</li>
+<li>Não minimize: "deixa pra lá" ou "isso é coisa de criança" silencia quem sofre</li>
+<li>Entre em contato com a escola imediatamente ao identificar situações de risco</li>
+<li>Monitore o ambiente digital com diálogo, não só com vigilância</li>
+<li>Busque mediação profissional para família e vítima</li>
+</ul>
+</article>
+</div>
+<!-- box de canais de denúncia no brasil -->
+<div aria-label="Canais de ajuda e denúncia" class="channels-box" role="complementary">
+<h3>📞 Canais de Ajuda e Denúncia no Brasil</h3>
+<ul class="channels-list">
+<li><strong>CVV — Centro de Valorização da Vida:</strong> Ligue 188 (24h, gratuito) ou chat em cvv.org.br</li>
+<li><strong>SaferNet Brasil:</strong> safernet.org.br — denúncia de crimes online</li>
+<li><strong>Disque 100:</strong> Disque Direitos Humanos — violações contra crianças e adolescentes</li>
+<li><strong>Delegacia de Crimes Cibernéticos:</strong> disponível na maioria dos estados — registre boletim de ocorrência</li>
+<li><strong>Escola:</strong> diretoria, coordenação ou orientação pedagógica são os primeiros pontos de contato</li>
+<li><strong>CAPS:</strong> Centros de Atenção Psicossocial oferecem atendimento psicológico gratuito pelo SUS</li>
+</ul>
+</div>
+<img alt="Ilustração de pessoas em rede de apoio e comunidade" loading="lazy" onerror="this.style.display='none'" src="https://undraw.co/api/illustrations/people_connected" style="max-width: 320px; margin: 2rem auto; border-radius: 12px;"/>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 8 — CONCLUSÃO
+  ============================================================ -->
+<section aria-labelledby="sec8-title" class="section-gap" id="conclusao">
+<div class="reading-col">
+<p class="section-eyebrow">Para encerrar</p>
+<h2 class="section-title" id="sec8-title">Uma Escola Mais Justa Começa em Cada Um de Nós</h2>
+<div class="prose">
+<p>O bullying e o cyberbullying não são problemas que se resolvem com punição isolada. Exigem uma mudança de cultura — uma decisão coletiva de não tolerar a crueldade, de olhar para quem está ao lado, de entender que a indiferença também é uma forma de cumplicidade.</p>
+<p>Cada um de nós — estudante, professor, pai, mãe, colega — tem um papel nessa transformação. Não é preciso esperar que o problema aconteça com alguém próximo para agir. A prevenção começa na escuta, na empatia e na disposição de falar sobre o que é difícil.</p>
+<p>Se este site fez você pensar, questionar ou querer agir, então cumpriu seu propósito. Compartilhe, converse, leve o tema para sua sala de aula, sua família, seu grupo de amigos. Cada conversa sobre empatia é um passo em direção a um ambiente mais seguro para todos.</p>
+</div>
+<p aria-label="Frase de impacto" class="closing-quote">
+        "A empatia não é um dom raro — é uma escolha que fazemos todos os dias, em cada interação."
+      </p>
+<div class="prose" style="text-align: center;">
+<p style="color: var(--color-text-muted); font-size: 0.9rem;">Produzido com cuidado por uma equipe de estudantes que acredita no poder da educação como ferramenta de transformação.</p>
+</div>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 9 — CONTADOR DE VISITAS
+  ============================================================ -->
+<section aria-labelledby="sec9-title" class="section-gap" id="contador">
+<div class="reading-col">
+<p class="section-eyebrow">Estatísticas do site</p>
+<h2 class="section-title" id="sec9-title">Quantas pessoas chegaram até aqui?</h2>
+<!-- 4 métricas principais -->
+<div class="metrics-grid" role="list">
+<div class="metric-card" role="listitem">
+<div aria-live="polite" class="metric-number" id="stat-unique">—</div>
+<div class="metric-label">Visitantes únicos</div>
+</div>
+<div class="metric-card" role="listitem">
+<div aria-live="polite" class="metric-number" id="stat-today">—</div>
+<div class="metric-label">Hoje</div>
+</div>
+<div class="metric-card" role="listitem">
+<div aria-live="polite" class="metric-number" id="stat-videos">—</div>
+<div class="metric-label">Vídeos assistidos</div>
+</div>
+<div class="metric-card" role="listitem">
+<div aria-live="polite" class="metric-number" id="stat-total">—</div>
+<div class="metric-label">Total de acessos</div>
+</div>
+</div>
+<!-- barras de proporção por fonte de acesso -->
+<h3 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-text-muted); margin-bottom: 1rem;">De onde vieram os visitantes</h3>
+<div class="sources-grid" id="sources-grid">
+<div class="source-bar-wrap">
+<div class="source-bar-label">Turma</div>
+<div class="source-bar-track"><div class="source-bar-fill" id="bar-turma"></div></div>
+<div class="source-bar-count" id="count-turma">—</div>
+</div>
+<div class="source-bar-wrap">
+<div class="source-bar-label">QR Code</div>
+<div class="source-bar-track"><div class="source-bar-fill" id="bar-qrcode"></div></div>
+<div class="source-bar-count" id="count-qrcode">—</div>
+</div>
+<div class="source-bar-wrap">
+<div class="source-bar-label">Cartaz</div>
+<div class="source-bar-track"><div class="source-bar-fill" id="bar-cartaz"></div></div>
+<div class="source-bar-count" id="count-cartaz">—</div>
+</div>
+<div class="source-bar-wrap">
+<div class="source-bar-label">WhatsApp</div>
+<div class="source-bar-track"><div class="source-bar-fill" id="bar-whatsapp"></div></div>
+<div class="source-bar-count" id="count-whatsapp">—</div>
+</div>
+<div class="source-bar-wrap">
+<div class="source-bar-label">Direto</div>
+<div class="source-bar-track"><div class="source-bar-fill" id="bar-direct"></div></div>
+<div class="source-bar-count" id="count-direct">—</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================
+       SEÇÃO 10 — RODAPÉ
+  ============================================================ -->
+<footer id="rodape" role="contentinfo">
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<h4>Sobre o Projeto</h4>
+<p><strong>EQUIPE  3</strong></p>
+<p>Escola Municipal Vereador João Bosco Ribeiro</p>
+<p>9º E — fundamental II</p>
+</div>
+<div class="footer-col">
+<h4>Integrantes</h4>
+<ul>
+<li>Alécia</li>
+<li>Anitissa</li>
+<li>Davi</li>
+<li>Lyandra</li>
+<li>Lyvia</li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Objetivo</h4>
+<p>Este site foi desenvolvido como projeto educacional para conscientizar a comunidade escolar sobre bullying e cyberbullying, promover a empatia e fornecer recursos práticos de apoio às vítimas e famílias.</p>
+</div>
+</div>
+<div class="footer-credits">
+<p>Este site registra dados de acesso (IP anonimizado) para fins estatísticos educacionais, conforme a LGPD (Lei nº 13.709/2018).</p>
+<p style="margin-top: 0.4rem;">Imagens: <a href="https://undraw.co" style="color: rgba(255,255,255,0.6);">Undraw</a> · Fontes: <a href="https://fonts.google.com" style="color: rgba(255,255,255,0.6);">Google Fonts</a> · Hospedagem: GitHub Pages · Dados: Supabase</p>
+</div>
+</div>
+</footer>
+<!-- lightbox: o iframe do youtube é inserido aqui via javascript ao clicar -->
+<div aria-label="Player de vídeo" aria-modal="true" id="lightbox" role="dialog">
+<div class="lightbox-inner">
+<button aria-label="Fechar vídeo" id="lightbox-close">✕</button>
+<!-- iframe adicionado dinamicamente — não fica pré-carregado na página -->
+</div>
+</div>
+<!-- ============================================================
+       JAVASCRIPT
+       aqui fica toda a lógica do site:
+       - navbar que some ao scrollar
+       - drawer lateral
+       - lightbox do youtube (e toda a saga do erro 153)
+       - analytics no supabase
+  ============================================================ -->
+
+<script src="script.js"></script></body>
+</html>
